@@ -1,0 +1,12 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com
+---
+
+This blog posts interesting data and analysis highlighting the everyday and mundane numbers that seem to control life.
