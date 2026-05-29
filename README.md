@@ -1,0 +1,1 @@
+Quarto blog for Numbers
