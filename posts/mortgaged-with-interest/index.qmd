@@ -14,7 +14,6 @@ Have you ever wondered when is the best time to buy a home? Well, wonder no more
 @fig-airquality further explores the impact of temperature on ozone level.
 
 ```{r}
-
 #| label: fig-airquality
 #| fig-cap: "Temperature and ozone level."
 #| warning: false
