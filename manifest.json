@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.5.2",
+  "metadata": {
+    "appmode": "quarto-static",
+    "primary_rmd": "index.qmd",
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "quarto": {
+    "version": "1.9.38",
+    "engines": ["markdown"]
+  },
+  "packages": null,
+  "files": {
+    "_quarto.yml": {
+      "checksum": "0d4d6c5cfaf9aa3ccd8b8c0449424405"
+    },
+    "about.qmd": {
+      "checksum": "a3f450069a62997830ff886d88ecb45e"
+    },
+    "index.qmd": {
+      "checksum": "f6b0ad96989da3877039206b97597587"
+    },
+    "posts/_metadata.yml": {
+      "checksum": "8bcb6b29f0a2436c347a042c69ef43a5"
+    },
+    "posts/mortgaged-with-interest/image.jpg": {
+      "checksum": "b70c3085a0d327cad300772b7762e926"
+    },
+    "posts/mortgaged-with-interest/index.qmd": {
+      "checksum": "1448bce14f89d75a06cd1277660860fc"
+    },
+    "posts/mortgaged-with-interest/index_files/figure-html/fig-inflation-adjusted-mortgage-1.png": {
+      "checksum": "43364033c4857331f7eab8570c0f95d7"
+    },
+    "posts/wages-are-all-the-rage/index.qmd": {
+      "checksum": "f87d7b1473962060f69289e4577b9925"
+    },
+    "posts/wages-are-all-the-rage/lunch.jpg": {
+      "checksum": "3b7c65d6a7adc5660c986737e8bc25ed"
+    },
+    "posts/welcome/index.qmd": {
+      "checksum": "10af69d03f88633def8746ed2076e70d"
+    },
+    "posts/welcome/thumbnail.jpg": {
+      "checksum": "fc72e025ff4806c3c6e58846c2e2be13"
+    },
+    "profile.jpg": {
+      "checksum": "d3d7f79095c5b9894979c52de5d3077f"
+    },
+    "README.md": {
+      "checksum": "9eba3170f8115ce06e663d3429c3bff8"
+    },
+    "styles.css": {
+      "checksum": "e31c3cdea03dfab8a29456978017bd10"
+    }
+  },
+  "users": null
+}
