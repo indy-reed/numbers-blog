@@ -13,7 +13,7 @@ website:
 format:
   html:
     theme:
-      - cosmo
+      - zephyr
       - brand
     css: styles.css
 
