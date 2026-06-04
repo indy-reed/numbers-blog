@@ -2,6 +2,9 @@
 title: "Mortgaged With Interest"
 author: "David Price"
 date: "2026-01-27"
+format:
+  html:
+    code-fold: true
 categories: [news, code, analysis]
 image: "image.jpg"
 ---
