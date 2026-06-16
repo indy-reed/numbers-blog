@@ -55,7 +55,7 @@ create_payment_schedule <- function(p, r, i, a, ptr, hir, n) {
   real_property_tax <- fv(pv = property_tax_rate, i = real_appreciation_rate, n = time)
   real_home_insurance <- fv(pv = home_insurance_rate, i = real_appreciation_rate, n = time)
 
-  payment_schedule <- data.frame(
+  payment_schedule <- tibble(
     time = time,
     nominal_mortgage = mortgage_payment,
     nominal_principal = principal_payment,
