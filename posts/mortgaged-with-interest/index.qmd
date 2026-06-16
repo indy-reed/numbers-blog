@@ -74,41 +74,41 @@ create_payment_schedule <- function(p, r, i, a, ptr, hir, n) {
   return(payment_schedule)
 }
 
-# initial_home_value <- 2e5
-# appreciation_rate <- 0.04
-# nominal_interest_rate <- 0.05
-# inflation_rate <- 0.03
-# term <- 30
-# property_tax_rate <- 0.015
-# home_insurance_rate <- 0.01
-# financed_amount <- initial_home_value
+initial_home_value <- 2e5
+appreciation_rate <- 0.04
+nominal_interest_rate <- 0.05
+inflation_rate <- 0.03
+term <- 30
+property_tax_rate <- 0.015
+home_insurance_rate <- 0.01
+financed_amount <- initial_home_value
 
-# payment_schedule <- create_payment_schedule(
-#   p = initial_home_value,
-#   r = nominal_interest_rate,
-#   i = inflation_rate,
-#   a = appreciation_rate,
-#   ptr = property_tax_rate,
-#   hir = home_insurance_rate,
-#   n = term
-# )
+payment_schedule <- create_payment_schedule(
+  p = initial_home_value,
+  r = nominal_interest_rate,
+  i = inflation_rate,
+  a = appreciation_rate,
+  ptr = property_tax_rate,
+  hir = home_insurance_rate,
+  n = term
+)
 
-# mortgage_payment <- payment_schedule %>%
-#   select(time, nominal_mortgage, real_mortgage) %>%
-#   pivot_longer(
-#     col = c(nominal_mortgage, real_mortgage),
-#     names_to = "payment",
-#     values_to = "amount"
-#   )
+mortgage_payment <- payment_schedule %>%
+  select(time, nominal_mortgage, real_mortgage) %>%
+  pivot_longer(
+    col = c(nominal_mortgage, real_mortgage),
+    names_to = "payment",
+    values_to = "amount"
+  )
 
-# mortgage_visual <- ggplot(
-#   data = mortgage_payment,
-#   aes(x = time, y = amount, color = payment)
-# ) +
-#   geom_line() +
-#   labs(x = "Time (years)", y = "Amount (USD)") +
-#   theme_minimal()
+mortgage_visual <- ggplot(
+  data = mortgage_payment,
+  aes(x = time, y = amount, color = payment)
+) +
+  geom_line() +
+  labs(x = "Time (years)", y = "Amount (USD)") +
+  theme_minimal()
 
-# mortgage_visual
+mortgage_visual
 
 ```
