@@ -1,22 +1,26 @@
 ---
-title: "Mortgaged With Interest"
-author: "David Price"
-date: "2026-01-27"
-format:
+title: "Old Faithful"
+format: 
   html:
-    code-fold: true
+    code-tools: 
+      source: https://github.com/quarto-dev/quarto-web/tree/main/docs/interactive/shiny/_examples/old-faithful/shiny-old-faithful.qmd
 server: shiny
-categories: [news, code, analysis]
-image: "image.jpg"
 ---
 
-Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. Why you might ask? Inflation. A typical fixed rate mortgage on a house remains constant over time while the cost of other goods and services tends to go up over time. Dollars in year 20 of the loan have less value than Dollars in year five.
+Data on eruptions of the Old Faithful geyser in Yellowstone National Park,
+Wyoming, USA. The data was collected continuously from August 1st until
+August 15th, 1985.
 
 ```{r}
-sliderInput("bins", "Number of bins:", 
-            min = 1, max = 50, value = 30)
+sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
 plotOutput("distPlot")
 ```
+
+The data consists of 299 pairs of measurements, referring to the time interval
+between the starts of successive eruptions and the duration of the subsequent
+eruption.
+
+Click the **Code** button above to see the source code for this example.
 
 ```{r}
 #| context: server
