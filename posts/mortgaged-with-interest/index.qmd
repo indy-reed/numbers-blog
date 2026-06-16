@@ -25,90 +25,90 @@ r_real <- function(r_nominal, r_inflation) {(1 + r_nominal) / (1 + r_inflation) 
 fv <- function(pv, i, n) {pv * (1 + i)^n}
 pv <- function(fv, i, n) {fv * (1 + i)^-n}
 
-create_payment_schedule <- function(p, r, i, a, ptr, hir, n) {
-  payment <- p / a_nbar_i_pv(i = r, n = n)
-  time <- seq(n)
-  mortgage_payment <- rep(payment, n)
-  interest_payment <- rep(NA_real_, n)
-  principal_payment <- rep(NA_real_, n)
+# create_payment_schedule <- function(p, r, i, a, ptr, hir, n) {
+#   payment <- p / a_nbar_i_pv(i = r, n = n)
+#   time <- seq(n)
+#   mortgage_payment <- rep(payment, n)
+#   interest_payment <- rep(NA_real_, n)
+#   principal_payment <- rep(NA_real_, n)
 
-  home_value <- rep(p, n)
-  property_tax_rate <- rep(ptr * p, n)
-  home_insurance_rate <- rep(hir * p, n)
+#   home_value <- rep(p, n)
+#   property_tax_rate <- rep(ptr * p, n)
+#   home_insurance_rate <- rep(hir * p, n)
 
-  remaining_principal <- p
+#   remaining_principal <- p
 
-  for (j in 1:n) {
-    interest_payment[j] <- remaining_principal * r
-    principal_payment[j] <- payment - interest_payment[j]
-    remaining_principal <- remaining_principal - principal_payment[j]
-  }
+#   for (j in 1:n) {
+#     interest_payment[j] <- remaining_principal * r
+#     principal_payment[j] <- payment - interest_payment[j]
+#     remaining_principal <- remaining_principal - principal_payment[j]
+#   }
 
-  nominal_value <- fv(pv = home_value, i = a, n = time)
-  nominal_property_tax <- fv(pv = property_tax_rate, i = a, n = time)
-  nominal_home_insurance <- fv(pv = home_insurance_rate, i = a, n = time)
-  real_mortgage_payment <- pv(fv = mortgage_payment, i = i, n = time)
-  real_principal_payment <- pv(fv = principal_payment, i = i, n = time)
-  real_interest_payment <- pv(fv = interest_payment, i = i, n = time)
-  real_appreciation_rate <- r_real(a, i)
-  real_value <- fv(pv = p, i = real_appreciation_rate, n = time)
-  real_property_tax <- fv(pv = property_tax_rate, i = real_appreciation_rate, n = time)
-  real_home_insurance <- fv(pv = home_insurance_rate, i = real_appreciation_rate, n = time)
+#   nominal_value <- fv(pv = home_value, i = a, n = time)
+#   nominal_property_tax <- fv(pv = property_tax_rate, i = a, n = time)
+#   nominal_home_insurance <- fv(pv = home_insurance_rate, i = a, n = time)
+#   real_mortgage_payment <- pv(fv = mortgage_payment, i = i, n = time)
+#   real_principal_payment <- pv(fv = principal_payment, i = i, n = time)
+#   real_interest_payment <- pv(fv = interest_payment, i = i, n = time)
+#   real_appreciation_rate <- r_real(a, i)
+#   real_value <- fv(pv = p, i = real_appreciation_rate, n = time)
+#   real_property_tax <- fv(pv = property_tax_rate, i = real_appreciation_rate, n = time)
+#   real_home_insurance <- fv(pv = home_insurance_rate, i = real_appreciation_rate, n = time)
 
-  payment_schedule <- tibble(
-    time = time,
-    nominal_mortgage = mortgage_payment,
-    nominal_principal = principal_payment,
-    nominal_interest = interest_payment,
-    nominal_value = nominal_value,
-    nominal_property_tax = nominal_property_tax,
-    nominal_home_insurance = nominal_home_insurance,
-    real_mortgage = real_mortgage_payment,
-    real_principal = real_principal_payment,
-    real_interest = real_interest_payment,
-    real_value = real_value,
-    real_property_tax = real_property_tax,
-    real_home_insurance = real_home_insurance
-  )
+#   payment_schedule <- tibble(
+#     time = time,
+#     nominal_mortgage = mortgage_payment,
+#     nominal_principal = principal_payment,
+#     nominal_interest = interest_payment,
+#     nominal_value = nominal_value,
+#     nominal_property_tax = nominal_property_tax,
+#     nominal_home_insurance = nominal_home_insurance,
+#     real_mortgage = real_mortgage_payment,
+#     real_principal = real_principal_payment,
+#     real_interest = real_interest_payment,
+#     real_value = real_value,
+#     real_property_tax = real_property_tax,
+#     real_home_insurance = real_home_insurance
+#   )
 
-  return(payment_schedule)
-}
+#   return(payment_schedule)
+# }
 
-initial_home_value <- 2e5
-appreciation_rate <- 0.04
-nominal_interest_rate <- 0.05
-inflation_rate <- 0.03
-term <- 30
-property_tax_rate <- 0.015
-home_insurance_rate <- 0.01
-financed_amount <- initial_home_value
+# initial_home_value <- 2e5
+# appreciation_rate <- 0.04
+# nominal_interest_rate <- 0.05
+# inflation_rate <- 0.03
+# term <- 30
+# property_tax_rate <- 0.015
+# home_insurance_rate <- 0.01
+# financed_amount <- initial_home_value
 
-payment_schedule <- create_payment_schedule(
-  p = initial_home_value,
-  r = nominal_interest_rate,
-  i = inflation_rate,
-  a = appreciation_rate,
-  ptr = property_tax_rate,
-  hir = home_insurance_rate,
-  n = term
-)
+# payment_schedule <- create_payment_schedule(
+#   p = initial_home_value,
+#   r = nominal_interest_rate,
+#   i = inflation_rate,
+#   a = appreciation_rate,
+#   ptr = property_tax_rate,
+#   hir = home_insurance_rate,
+#   n = term
+# )
 
-mortgage_payment <- payment_schedule %>%
-  select(time, nominal_mortgage, real_mortgage) %>%
-  pivot_longer(
-    col = c(nominal_mortgage, real_mortgage),
-    names_to = "payment",
-    values_to = "amount"
-  )
+# mortgage_payment <- payment_schedule %>%
+#   select(time, nominal_mortgage, real_mortgage) %>%
+#   pivot_longer(
+#     col = c(nominal_mortgage, real_mortgage),
+#     names_to = "payment",
+#     values_to = "amount"
+#   )
 
-mortgage_visual <- ggplot(
-  data = mortgage_payment,
-  aes(x = time, y = amount, color = payment)
-) +
-  geom_line() +
-  labs(x = "Time (years)", y = "Amount (USD)") +
-  theme_minimal()
+# mortgage_visual <- ggplot(
+#   data = mortgage_payment,
+#   aes(x = time, y = amount, color = payment)
+# ) +
+#   geom_line() +
+#   labs(x = "Time (years)", y = "Amount (USD)") +
+#   theme_minimal()
 
-mortgage_visual
+# mortgage_visual
 
 ```
