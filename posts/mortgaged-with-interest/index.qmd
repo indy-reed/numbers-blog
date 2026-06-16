@@ -5,21 +5,24 @@ date: "2026-01-27"
 format:
   html:
     code-fold: true
+server: shiny
 categories: [news, code, analysis]
 image: "image.jpg"
 ---
 
 Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. Why you might ask? Inflation. A typical fixed rate mortgage on a house remains constant over time while the cost of other goods and services tends to go up over time. Dollars in year 20 of the loan have less value than Dollars in year five.
 
-@fig-airquality further explores the impact of temperature on ozone level.
+```{r}
+sliderInput("bins", "Number of bins:", 
+            min = 1, max = 50, value = 30)
+plotOutput("distPlot")
+```
 
 ```{r}
-#| label: fig-airquality
-#| fig-cap: "Temperature and ozone level."
-#| warning: false
-
-library(ggplot2)
-
-ggplot(airquality, aes(Temp, Ozone)) + geom_point() + geom_smooth(method = "loess")
-
+#| context: server
+output$distPlot <- renderPlot({
+  x <- faithful[, 2]  # Old Faithful Geyser data
+  bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  hist(x, breaks = bins, col = 'darkgray', border = 'white')
+})
 ```
