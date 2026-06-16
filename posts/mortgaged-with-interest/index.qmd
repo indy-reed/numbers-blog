@@ -18,14 +18,11 @@ Have you ever wondered when is the best time to buy a home? Well, wonder no more
 #| fig-cap: "Mortgage payment over time"
 #| warning: false
 
-library(ggplot2)
+library(tidyverse)
 
 a_nbar_i_pv <- function(i, n) {(1 - (1 + i)^-n) / i}
-
 r_real <- function(r_nominal, r_inflation) {(1 + r_nominal) / (1 + r_inflation) - 1}
-
 fv <- function(pv, i, n) {pv * (1 + i)^n}
-
 pv <- function(fv, i, n) {fv * (1 + i)^-n}
 
 create_payment_schedule <- function(p, r, i, a, ptr, hir, n) {
@@ -48,23 +45,14 @@ create_payment_schedule <- function(p, r, i, a, ptr, hir, n) {
   }
 
   nominal_value <- fv(pv = home_value, i = a, n = time)
-
   nominal_property_tax <- fv(pv = property_tax_rate, i = a, n = time)
-
   nominal_home_insurance <- fv(pv = home_insurance_rate, i = a, n = time)
-
   real_mortgage_payment <- pv(fv = mortgage_payment, i = i, n = time)
-
   real_principal_payment <- pv(fv = principal_payment, i = i, n = time)
-
   real_interest_payment <- pv(fv = interest_payment, i = i, n = time)
-
   real_appreciation_rate <- r_real(a, i)
-
   real_value <- fv(pv = p, i = real_appreciation_rate, n = time)
-
   real_property_tax <- fv(pv = property_tax_rate, i = real_appreciation_rate, n = time)
-
   real_home_insurance <- fv(pv = home_insurance_rate, i = real_appreciation_rate, n = time)
 
   payment_schedule <- tibble(
@@ -95,13 +83,15 @@ property_tax_rate <- 0.015
 home_insurance_rate <- 0.01
 financed_amount <- initial_home_value
 
-payment_schedule <- create_payment_schedule(p = initial_home_value,
-                                            r = nominal_interest_rate, 
-                                            i = inflation_rate,
-                                            a = appreciation_rate,
-                                            ptr = property_tax_rate,
-                                            hir = home_insurance_rate,
-                                            n = term)
+payment_schedule <- create_payment_schedule(
+  p = initial_home_value,
+  r = nominal_interest_rate,
+  i = inflation_rate,
+  a = appreciation_rate,
+  ptr = property_tax_rate,
+  hir = home_insurance_rate,
+  n = term
+)
 
 mortgage_payment <- payment_schedule %>%
   select(time, nominal_mortgage, real_mortgage) %>%
@@ -112,12 +102,13 @@ mortgage_payment <- payment_schedule %>%
   )
 
 mortgage_visual <- ggplot(
-  data = nominal_payment,
-  aes(x = time, y = amount, color = payment)) + 
+  data = mortgage_payment,
+  aes(x = time, y = amount, color = payment)
+) +
   geom_line() +
   labs(x = "Time (years)", y = "Amount (USD)") +
   theme_minimal()
 
-nominal_visual
+mortgage_visual
 
 ```
