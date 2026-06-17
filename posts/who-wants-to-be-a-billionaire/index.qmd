@@ -3,6 +3,7 @@ title: "Who Wants to be a Billionaire?"
 subtitle: "How many years would it take?"
 author: "David Price"
 date: "2026-06-15"
+date-modified: "2026-06-17"
 categories: [news, analysis]
 image: "image_money.jpg"
 ---

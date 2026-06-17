@@ -3,6 +3,7 @@ title: "Owning Inflation"
 subtitle: "Mortgaged With Interest"
 author: "David Price"
 date: "2026-01-27"
+date-modified: "2026-06-17"
 categories: [analysis]
 image: "image.jpg"
 ---

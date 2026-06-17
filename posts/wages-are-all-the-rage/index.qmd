@@ -3,6 +3,7 @@ title: "Wages Are All the Rage"
 subtitle: "How Inflation Ate My Lunch"
 author: "David Price"
 date: "2026-01-27"
+date-modified: "2026-06-17"
 categories: [news, analysis]
 image: "lunch.jpg"
 ---
