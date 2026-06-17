@@ -9,17 +9,53 @@ categories: [news, code, analysis]
 image: "image.jpg"
 ---
 
-Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. Why you might ask? Inflation. A typical fixed rate mortgage on a house remains constant over time while the cost of other goods and services tends to go up over time. Dollars in year 20 of the loan have less value than Dollars in year five.
-
-@fig-airquality further
+Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. Why you might ask? Inflation. A typical fixed rate mortgage on a house remains constant over time while the cost of other goods and services tends to go up over time. Dollars in year 20 of the loan have less value than dollars in year five due to inflation.
 
 ```{r}
-#| label: fig-airquality
-#| fig-cap: "Temperature and ozone level."
+#| label: own-inflation
+#| fig-cap: "Real value versus face value of mortgage payment"
 #| warning: false
 
 library(tidyverse)
 
-ggplot(airquality, aes(Temp, Ozone)) + geom_point() 
+a_nbar_i_pv <- function(i, n) {
+  (1 - 1 / (1 + i)^n) / i
+}
+pv <- function(fv, i, n) {
+  fv / (1 + i)^n
+}
+
+initial_home_value <- 2e5
+nominal_interest_rate <- 0.05
+inflation_rate <- 0.03
+term <- 30
+
+payment <- initial_home_value / a_nbar_i_pv(i = nominal_interest_rate, n = term)
+time <- seq(term)
+face_mortgage_payment <- rep(payment, term)
+real_mortgage_payment <- pv(
+  fv = face_mortgage_payment,
+  i = inflation_rate,
+  n = time
+)
+
+payment_schedule <- tibble(
+  time = time,
+  face = face_mortgage_payment,
+  real = real_mortgage_payment
+)
+
+mortgage_payment <- payment_schedule %>%
+  select(time, face, real) %>%
+  pivot_longer(
+    col = c(face, real),
+    names_to = "Value",
+    values_to = "payment"
+  )
+
+ggplot(data = mortgage_payment, aes(x = time, y = payment, color = Value)) +
+  geom_line() +
+  labs(x = "Time (years)", y = "Payment (USD)") +
+  theme_minimal()
 
 ```
