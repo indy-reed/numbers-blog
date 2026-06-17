@@ -66,3 +66,5 @@ ggplot(data = mortgage_payment, aes(x = time, y = payment, color = Value)) +
 ```
 
 This observation does not include other costs that can increase as the real value of the home changes over time. Two costs other costs that ought to be considered are homeowners insurance and property tax that are determined based on the current face value of the home which may appreciate at a different rate than inflation. If the appreciation rate matches inflation, the real cost of homeowners insurance and property tax ought to remain roughly constant even as the amount paid each year increases.
+
+<iframe src="https://indy-reed-by-the-numbers.share.connect.posit.cloud" width="100%" height="600px" style="border:none;"></iframe>
