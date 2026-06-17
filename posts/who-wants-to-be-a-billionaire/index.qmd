@@ -1,5 +1,6 @@
 ---
 title: "Who Wants to be a Billionaire?"
+subtitle: "How many years would it take?"
 author: "David Price"
 date: "2026-06-15"
 categories: [news, analysis]
@@ -7,6 +8,8 @@ image: "image_money.jpg"
 ---
 
 So, you want to be a billionaire. Well, who doesn't? But, how many life times do you have to achieve it?
+
+![](image_money.jpg)
 
 Recently, many populist figures questions of how people becoming billionaires. Implicit is that they do not deserve what they have received or they got it through exploiting others. To counter this narrative, consider the current size of the American population. As of 2024 ACS 5-Year estimates published by the US Census Bureau, 334,922,499 people or roughly 335 million people live in America in 2024. So, selling one product to each person in America that earns \$3 profit once this year would earn one billion dollars. \$3 dollars does not sound like much, but 335 million of anything is. So, making and selling 335 million products that can earn \$3 profit will earn you \$1 billion, how long would it take to make and sell 335 million products?
 

@@ -1,12 +1,13 @@
 ---
-title: "Owning Inflation: Mortgaged With Interest"
+title: "Owning Inflation"
+subtitle: "Mortgaged With Interest"
 author: "David Price"
 date: "2026-01-27"
 categories: [analysis]
 image: "image.jpg"
 ---
 
-Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. 
+Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago.
 
 ![](image.jpg)
 

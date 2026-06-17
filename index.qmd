@@ -1,5 +1,6 @@
 ---
-title: "numbers-blog"
+title: "Numbers Blog"
+subtitle: "Examining the numbers of everyday life"
 listing:
   contents: posts
   feed: true
