@@ -1,19 +1,20 @@
 ---
-title: "Mortgaged With Interest"
+title: "Owning Inflation: Mortgaged With Interest"
 author: "David Price"
 date: "2026-01-27"
-format: 
-  html: 
-    code-fold: true
-categories: [news, code, analysis]
+categories: [analysis]
 image: "image.jpg"
 ---
 
-Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. Why you might ask? Inflation. A typical fixed rate mortgage on a house remains constant over time while the cost of other goods and services tends to go up over time. As @fig-own-inflation illustrates, dollars in year 20 of the loan have less value than dollars in year five due to inflation.
+Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. 
+
+![](image.jpg)
+
+Why you might ask? Inflation. A typical fixed rate mortgage on a house remains constant over time while the cost of other goods and services tends to go up over time. As @fig-own-inflation illustrates, dollars in year 20 of the loan have less value than dollars in year five due to inflation.
 
 ```{r}
 #| label: fig-own-inflation
-#| fig-cap: "Real value versus face value of mortgage payment"
+#| fig-cap: "Real value versus face value of total annual mortgage payment. Face value is determined using the annuity immediate for a loan amount of $200,000 with nominal annual interest rate of 5.00% and annual payments for 30 years. Real value adjusts face value using an annual fixed inflation rate of 3.00%."
 #| echo: false
 #| warning: false
 
@@ -57,7 +58,9 @@ mortgage_payment <- payment_schedule %>%
 ggplot(data = mortgage_payment, aes(x = time, y = payment, color = Value)) +
   geom_line() +
   labs(x = "Time (years)", y = "Payment (USD)") +
-  ylim(0, payment) +
+  ylim(0, NA) +
   theme_minimal()
 
 ```
+
+This observation does not include other costs that can increase as the real value of the home changes over time. Two costs other costs that ought to be considered are homeowners insurance and property tax that are determined based on the current face value of the home which may appreciate at a different rate than inflation. If the appreciation rate matches inflation, the real cost of homeowners insurance and property tax ought to remain roughly constant even as the amount paid each year increases.
