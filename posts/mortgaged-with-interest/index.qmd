@@ -11,14 +11,14 @@ image: "image.jpg"
 
 Have you ever wondered when is the best time to buy a home? Well, wonder no more: it was ten or twenty years ago. Why you might ask? Inflation. A typical fixed rate mortgage on a house remains constant over time while the cost of other goods and services tends to go up over time. Dollars in year 20 of the loan have less value than Dollars in year five.
 
-@fig-airquality further 
+@fig-airquality further
 
 ```{r}
 #| label: fig-airquality
 #| fig-cap: "Temperature and ozone level."
 #| warning: false
 
-library(ggplot2)
+library(tidyverse)
 
 ggplot(airquality, aes(Temp, Ozone)) + geom_point() 
 
