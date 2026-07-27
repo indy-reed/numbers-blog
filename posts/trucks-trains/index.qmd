@@ -6,7 +6,7 @@ date: "2026-07-18"
 categories: [news, analysis, technology, environment]
 ---
 
-The pressure to find alternatives to fossil fuels ebbs and flows. One potential alternative, biodiesel is promoted as a viable alternative. It requires a simple chemical reaction that transforms common cooking oil into a viable fuel. The inventor developed the diesel engine to run on vegetable rather than the petroleum based product used today.
+The pressure to find alternatives to fossil fuels ebbs and flows. One potential alternative, biodiesel is promoted as a viable alternative. It requires a simple chemical reaction that transforms common cooking oil into a viable fuel. The inventor of the diesel engine Rudolf Diesel developed it to run on plant-based oils rather than the petroleum based product used today.
 
 The challenge is can sufficient diesel fuel be produced from soy beans, corn, and other plant based alternatives to petroleum. The answer: not really. Not at the current level of fuel consumption. In the United States, the 390 million acres of arable agricultural land used for crops. On average, one acre can produce 53 bushels of soybeans totaling 562 metric tons of soy beans. However, only about 112 metric tons of raw soybean oil can be extracted - the remaining 450 metric tons of soybean meal can be used for other purposes. The transformation of raw soybean oil to biodesel is roughly one to one so 112 million metric tons or 3.95 billion gallons of biodiesel can be produced each year. BNSF and Union Pacific use about 1 billion gallons of diesel fuel each year to fuel their trains. So,  
 
