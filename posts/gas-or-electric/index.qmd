@@ -1,16 +1,26 @@
 ---
-title: "Gas or Electric: Both"
-subtitle: "The Future of Automobiles"
+title: "Is the Future of Automobile Gas or Electric"
+subtitle: "It's probably both"
 author: "David Price"
 date: "2026-07-23"
-categories: [news, analysis, technology, environment]
+categories: [analysis, technology, environment]
 ---
 
-Will electric cars overtake those powered by internal combustion engines? Anything is possible, but one limiting factor for electric cars is how the energy is stored. A common complaint for electric vehicles is the time it takes to charge the batteries and the limited range historically. Tesla cars and other current generation vehicles now have ranges that are compariable to conventional cars. The simple reason for the difference is the energy density of batteries when compared to carbon based fuel. 
+Will electric cars overtake those powered by internal combustion engines? Anything is possible, but one limiting factor for electric cars is how the energy is stored. Two common complaints facing electric vehicles are: the limited range and the time it takes to charge the batteries. Newer electric car makers such Tesla have incresed the distance electric vehicles can travel such that the ranges are compariable to conventional cars. But, the challenge of charging the battery still remains. The reason for the difference is simply the energy density of batteries when compared to carbon based fuel. 
 
-Gasoline sold to consumers is rated based on a mixture of heptane and octane. For those unfamilar with the intricacies of organic chemistry, the difference between heptane and octane is a carbon atom and two hydrogen atoms. Since fuel is rated based on the amount of octane, consider n-octane as a standin for gasoline. 47.9 kJ of energy can be released from the complete combustion of one gram of n-octane (the combustion of n-heptane releases a similar amount of energy: 48.17 kJ/g). 
+Gasoline sold to consumers is rated based on a mixture of heptane and octane. For those unfamilar with the intricacies of organic chemistry, the difference between heptane and octane is a carbon atom and two hydrogen atoms. Since fuel is rated based on the amount of octane, consider n-octane as a standin for gasoline. 47.9 kJ of energy can be released from the complete combustion of one gram of n-octane (the combustion of n-heptane releases a similar amount of energy: 48.17 kJ/g). For those without a background in physics, gravity exerts a force of roughly ten Newtons on a one kilogram object. Lifting the object one meter requires 10 Joules of work or energy. If all the energy in one gram of gasoline could be converted into work, it would be enough to lift an object with a mass of one metric ton (or 1,000 kg) roughly five meters.
 
 Batteries come in different sizes ranging from AA alkaline batteries that power simple electronics to rechargable lithium batteries that power smart phones and computers to the latest generation of batteries powering electric vehicles. The electrical energy they contain varies from 10 kJ (~3 Wh) for AA alkaline batteries, 50 kJ for smartphone batteries, 360 kJ for a laptop battery, and 180,000 to 360,000 kJ for an electric car. For the electric car battery, the energy is the equivalent 3.8 to 7.5 kg of n-octane or between 1.4 and 2.8 gallons of gasoline (assuming the density of n-octane is 0.7 g/mL).
 
-Charging any battery depends on two factors the amount of current and the size of the battery. The outlet in most homes provide 15 Amps of electricity at 120 Volts or 1.8 kW of power (1.8 kJ/s). At that rate, it takes 27 hours or more than one day to completely charge a 180,000 kJ battery. New Level 2 outlets for at home charging that can supply upto 9.6 kW of power drop the time taken to 5.2 hours. Public charging stations have anywhere from 50 kW to 350 kW of power meaning they can take 8.6 minutes to one hour. In contrast, a common fuel pump at a gas station dispenses fuel at a rate of 8 to 10 gallons per minute meaning it take roughly 0.3 minutes (18 seconds) to transfer the same quantity of chemical energy.
+Charging any battery depends on two factors the amount of current available and the size of the battery. The outlet in most homes provide 15 Amps of electricity at 120 Volts or 1.8 kW of power (1.8 kJ/s). At that rate, it takes 27 hours or more than one day to completely charge a 180,000 kJ battery. New Level 2 outlets for at home charging that can supply up to 9.6 kW of power drop the time taken to 5.2 hours. Public charging stations have anywhere from 50 kW to 350 kW of power meaning they can take from 8.6 minutes to one hour. In contrast, a common fuel pump at a gas station dispenses fuel at a rate of 8 to 10 gallons per minute meaning it take roughly 0.3 minutes (18 seconds) to transfer the same quantity of chemical energy.
+
+The contrast can be extended to the vehicles. For an electric vehicle, Tesla Model 3 ranks at the top of Car and Driver for best sedan of 2026. To be fair Hyundai and Mercedes-Benz are the other options listed. The Model 3 Base model has an EPA estimated range of 321 miles with 70 kWh lithium-ion battery pack and 3,721 lb curb weight. For the conventional sedans come in two sizes: compact, and mid size (Full sized sedans have been largely been replaced by SUVs and will not be included). Popular compact cars include: Honda Civic, Toyota Corolla, Mazda 3, Hyundia Elantra, Kia K4, and Volkswagen Jetta. Popular mid sized cars include: Honda Accord, Kia K5, Hyundia Sonata, and Nissan Altima. 
+
+| Car model | Range | Battery Capacity | Fuel Capacity | Weight | Width | Length |
+|---|---|---|---|---|---|---|
+| Tesla Model 3 | 321 | 70 | | 3,721 | 72.8 | 185.6 |
+| Honda Civic | 396 | | 12.4 | 2,875 | 70.9 | 184.8 |
+| Toyota Corolla | 422 | | 13.2 | 2,955 | 70.1 | 182.5 |
+| Kia K4 | 372 | | 12.4 | 2,956 | 72.8 | 185.4 |
+| Honda Accord | 429 | | 14.8 | 3,239 | 73.3 | 195.7|
 

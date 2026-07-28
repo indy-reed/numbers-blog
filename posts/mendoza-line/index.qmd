@@ -1,11 +1,19 @@
 ---
 title: "How to Measure a Quarterback"
-subtitle: "The Mendoza Line"
+subtitle: "Where's their Mendoza Line?"
 author: "David Price"
 date: "2026-07-27"
-categories: [news, analysis, sports]
+categories: [analysis, sports]
 ---
 
-In baseball, the batting average is often used to measure the value of a player. With more than a century of data from different eras, the Mendoza line  -- the only exception os the pitcher. No matter how valuable the player may be as a fielder, if he cannot consistently hit the ball, he won't remain in major league baseball. Named after Mario Mendoza who play in the majors for nine years. 
+In baseball, the batting average is often used to measure the value of a position player. With more than a century of data spanning different eras, any player who cannot hit higher than 0.200 does not stay long in MLB. Informally known as the Mendoza line after Mario Mendoza - a player with 9 years in the majors whose career average of 0.215 with several seasons when he averaged 0.200 or less. His fielding wizardry at short stop made him valuable. His inability to hit made him a liability. The Mendoza line monikor became the threshold. At or above the Mendoza line, excellence in other areas could be enough. Below it for more than a season or two and it is time to change careers.
 
-So, is there a line for NFL quarterbacks that if they fall below, they are not a starter? What stat to use? What stats are relevant?
+So, is there a line for NFL quarterbacks that if they fall below, they are not a starting caliber quarterback? Since the Mendoza line is based on a relatively simple statistic, any advanced metrics that aggregate a quarterback's performance do not apply. That said stats available for consideration are: touchdowns, first downs, completions, attempts, interceptions, completion percentage, passing yards, yards per attempt, sacks, and rushing yards. 
+
+Of these available stats, completion percentage and yards per attempt closely match the significance of batting average. The other stats can be inflated by game situation and offensive styles: passing yards, number of completions, and attempts can be accumulated without impacting the outcome of a game. Is a quarterback who throws for 400 yards and loses the game more valuable than a quarterback who throws for 250 yards and wins the game? Interceptions and sacks can alter a game significantly. Don't believe me - just ask Tom Brady. One of his Super Bowl wins is due to an interception on the goal line that sealed the win and another had a sack that pushed his opponent out of field goal range and gave him the chance to mount a miraculous comeback. Finally rushing yards can provide added offense to the team, but increase injury risk. Many of the best quarterbacks - even today - don't rush for a significant number of yards to make it a meaningful cut off. Between yards per completion and completion percentage, yards per completion is closer to slugging percentage in baseball than batting average. 
+
+Is completion percentage the best statistic? Probably not, hence the number of attempts to create advance metrics that capture in the multiple facets of playing Quarterback. But, it could be a useful stat for identifying starting level Quarterbacks. A quick examination of completion percentage suggest that equivalent line should be 60%. 
+
+So, over the past five years, 20 quarterbacks who have thrown for more than 1,000 yards in that season failed to complete more than 60% of their passes: Trevor Lawrence (2021), Sam Darnold (2021, 2022), Zach Wilson (2021, 2022), Justin Fields (2021), Jameis Winston (2021), Trevor Siemian (2021), Mike White (2022), Deshaun Watson (2022), Joe Flacco (2022), Cooper Rush (2022), Bryce Young (2023), Will Levis (2023), Bailey Zappe (2023), Anthony Richardson (2024), Spencer Rattler (2024), Drew Lock (2024), Caleb Williams (2025), Cam Ward (2025), J.J. McCarthy (2025), and Shedeur Sanders (2025). 
+
+Peyton Manning fell below 60% in 2015 and retired the next year. Tim Tebow in his best year (2011) only completed 46.5% of his passes - during his career, he only completed 47.9% despite all the mania. In the late 1990s, Troy Aikman's final four years hovered at just below 60% before he retired in 2000. 
