@@ -1,0 +1,7 @@
+faicons
+shiny
+shinyswatch
+shinyWidgets
+plotly
+ridgeplot
+databricks-sdk

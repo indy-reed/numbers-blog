@@ -19,7 +19,7 @@
 
 library(shiny)
 library(bslib)
-#library(tidyverse)
+library(tidyverse)
 
 # General financial functions for models:
 
@@ -164,21 +164,21 @@ create_payment_schedule <- function(p, r, i, a, ptr, hir, n) {
   )
   
   # Combine information into a data frame for visualization and other analysis.
-  #payment_schedule <- tibble(time = time, 
-  #                           nominal_mortgage = mortgage_payment, 
-  #                           nominal_principal = principal_payment,
-  #                           nominal_interest = interest_payment,
-  #                           nominal_value = nominal_value,
-  #                           nominal_property_tax = nominal_property_tax,
-  #                           nominal_home_insurance = nominal_home_insurance,
-  #                           real_mortgage = real_mortgage_payment,
-  #                           real_principal = real_principal_payment,
-  #                           real_interest = real_interest_payment,
-  #                           real_value = real_value,
-  #                           real_property_tax = real_property_tax,
-  #                           real_home_insurance = real_home_insurance)
+  payment_schedule <- tibble(time = time, 
+                             nominal_mortgage = mortgage_payment, 
+                             nominal_principal = principal_payment,
+                             nominal_interest = interest_payment,
+                             nominal_value = nominal_value,
+                             nominal_property_tax = nominal_property_tax,
+                             nominal_home_insurance = nominal_home_insurance,
+                             real_mortgage = real_mortgage_payment,
+                             real_principal = real_principal_payment,
+                             real_interest = real_interest_payment,
+                             real_value = real_value,
+                             real_property_tax = real_property_tax,
+                             real_home_insurance = real_home_insurance)
 
-  #return(payment_schedule)
+  return(payment_schedule)
 }
 
 term <- 30
@@ -259,16 +259,16 @@ ui <- fluidPage(
 #        card("Card 2"),
 #        card("Card 3")
 #      ),
-      #fluidRow(
-      #  column(
-      #    width = 6,
-      #    plotOutput("nominal_payment")
-      #  ),
-      #  column(
-      #    width = 6,
-      #    plotOutput("real_payment")
-      #  )
-      #)
+      fluidRow(
+        column(
+          width = 6,
+          plotOutput("nominal_payment")
+        ),
+        column(
+          width = 6,
+          plotOutput("real_payment")
+        )
+      )
       #plotOutput("nominal_interest")
     )
   )  
@@ -278,117 +278,117 @@ ui <- fluidPage(
 server <- function(input, output) {
 
   # Payment data 
-  #payment_data <- reactive({
-  #  create_payment_schedule(p = input$home_price_slider,
-  #                          r = 0.01 * input$interest_rate_slider, 
-  #                          i = 0.01 * input$inflation_rate_slider,
-  #                          a = 0.01 * input$appreciation_rate_slider,
-  #                          ptr = 0.01 * input$tax_rate_slider,
-  #                          hir = 0.01 * input$insurance_slider, 
-  #                          n = term)    
-  #})
+  payment_data <- reactive({
+    create_payment_schedule(p = input$home_price_slider,
+                            r = 0.01 * input$interest_rate_slider, 
+                            i = 0.01 * input$inflation_rate_slider,
+                            a = 0.01 * input$appreciation_rate_slider,
+                            ptr = 0.01 * input$tax_rate_slider,
+                            hir = 0.01 * input$insurance_slider, 
+                            n = term)    
+  })
   
   # Upper limit for y-axis
-  #nominal_limit <- reactive({
-  #  payment_data() %>%
-  #    mutate(nominal_total = rowSums(across(c(nominal_mortgage, 
-  #                                            nominal_property_tax, 
-  #                                            nominal_home_insurance)))) %>%
-  #    filter(time == 30) %>% pull(nominal_total)
-  #})
+  nominal_limit <- reactive({
+    payment_data() %>%
+      mutate(nominal_total = rowSums(across(c(nominal_mortgage, 
+                                              nominal_property_tax, 
+                                              nominal_home_insurance)))) %>%
+      filter(time == 30) %>% pull(nominal_total)
+  })
   
-  #output$nominal_payment <- renderPlot({
+  output$nominal_payment <- renderPlot({
     
     # Gather columns to be included in line chart for house payment. 
-  #  nominal_payment <- payment_data() %>%
-  #    select(time, nominal_mortgage, nominal_property_tax, nominal_home_insurance) %>%
-  #    rename(
-  #      Mortgage = nominal_mortgage, 
-  #      Tax = nominal_property_tax,
-  #      Insurance = nominal_home_insurance
-  #    ) %>%
-  #    pivot_longer(
-  #      col = c(Mortgage, Tax, Insurance),
-  #      names_to = "Payment",
-  #      values_to = "Amount"
-  #    )
+    nominal_payment <- payment_data() %>%
+      select(time, nominal_mortgage, nominal_property_tax, nominal_home_insurance) %>%
+      rename(
+        Mortgage = nominal_mortgage, 
+        Tax = nominal_property_tax,
+        Insurance = nominal_home_insurance
+      ) %>%
+      pivot_longer(
+        col = c(Mortgage, Tax, Insurance),
+        names_to = "Payment",
+        values_to = "Amount"
+      )
     
-  #  nominal_visual <- ggplot(
-  #    data = nominal_payment,
-  #    aes(x = time, y = Amount, fill = Payment)) + 
-  #    geom_area(position = "stack", color = "white", linewidth = 0.2, alpha = 0.8) +
-  #    labs(x = "Time (years)", y = "Amount (USD)", 
-  #         title = "Annual Payment",
-  #         subtitle = "Currency at time of payment") +
-  #    scale_y_continuous(limits = c(0, nominal_limit())) +
-  #    theme_light() + 
-  #    theme(
-  #      legend.position = "inside",
-  #      legend.position.inside = c(0.20, 0.85) # Top-left interior corner
-  #    ) 
+    nominal_visual <- ggplot(
+      data = nominal_payment,
+      aes(x = time, y = Amount, fill = Payment)) + 
+      geom_area(position = "stack", color = "white", linewidth = 0.2, alpha = 0.8) +
+      labs(x = "Time (years)", y = "Amount (USD)", 
+           title = "Annual Payment",
+           subtitle = "Currency at time of payment") +
+      scale_y_continuous(limits = c(0, nominal_limit())) +
+      theme_light() + 
+      theme(
+        legend.position = "inside",
+        legend.position.inside = c(0.20, 0.85) # Top-left interior corner
+      ) 
     
-  #  nominal_visual
+    nominal_visual
     
-  #})
+  })
   
-  #output$real_payment <- renderPlot({
+  output$real_payment <- renderPlot({
 
     # Gather columns to be included in line chart for house payment. 
-  #  real_payment <- payment_data() %>%
-  #    select(time, real_mortgage, real_property_tax, real_home_insurance) %>%
-  #    rename(
-  #      Mortgage = real_mortgage, 
-  #      Tax = real_property_tax,
-  #      Insurance = real_home_insurance
-  #    ) %>%
-  #    pivot_longer(
-  #      col = c(Mortgage, Tax, Insurance),
-  #      names_to = "Payment",
-  #      values_to = "Amount"
-  #    )
+    real_payment <- payment_data() %>%
+      select(time, real_mortgage, real_property_tax, real_home_insurance) %>%
+      rename(
+        Mortgage = real_mortgage, 
+        Tax = real_property_tax,
+        Insurance = real_home_insurance
+      ) %>%
+      pivot_longer(
+        col = c(Mortgage, Tax, Insurance),
+        names_to = "Payment",
+        values_to = "Amount"
+      )
     
-  #  real_visual <- ggplot(
-  #    data = real_payment,
-  #    aes(x = time, y = Amount, fill = Payment)) + 
-  #    geom_area(position = "stack", color = "white", linewidth = 0.2, alpha = 0.8) +
-  #    labs(x = "Time (years)", y = "Amount (USD)", 
-  #         title = "Annual Payment",
-  #         subtitle = "Adjusted to value at time of purchase") +
-  #    scale_y_continuous(limits = c(0, nominal_limit())) +
-  #    theme_light() + 
-  #    theme(
-  #      legend.position = "inside",
-  #      legend.position.inside = c(0.20, 0.85) # Top-left interior corner
-  #    ) 
+    real_visual <- ggplot(
+      data = real_payment,
+      aes(x = time, y = Amount, fill = Payment)) + 
+      geom_area(position = "stack", color = "white", linewidth = 0.2, alpha = 0.8) +
+      labs(x = "Time (years)", y = "Amount (USD)", 
+           title = "Annual Payment",
+           subtitle = "Adjusted to value at time of purchase") +
+      scale_y_continuous(limits = c(0, nominal_limit())) +
+      theme_light() + 
+      theme(
+        legend.position = "inside",
+        legend.position.inside = c(0.20, 0.85) # Top-left interior corner
+      ) 
     
-  #  real_visual
+    real_visual
     
-  #})
+  })
   
-  #output$nominal_interest <- renderPlot({
+  output$nominal_interest <- renderPlot({
     
-  #  interest <- payment_data() %>%
-  #    select(time, nominal_principal, nominal_interest) %>%
-  #    rename(
-  #      Principal = nominal_principal, 
-  #      Interest = nominal_interest, 
-  #    ) %>%
-  #    pivot_longer(
-  #      col = c(Principal, Interest),
-  #      names_to = "Payment",
-  #      values_to = "Amount"
-  #    )
+    interest <- payment_data() %>%
+      select(time, nominal_principal, nominal_interest) %>%
+      rename(
+        Principal = nominal_principal, 
+        Interest = nominal_interest, 
+      ) %>%
+      pivot_longer(
+        col = c(Principal, Interest),
+        names_to = "Payment",
+        values_to = "Amount"
+      )
     
-  #  interest_visual <- ggplot(
-  #    data = interest,
-  #    aes(x = time, y = Amount, color = Payment)) + 
-  #    geom_point() +
-  #    labs(x = "Time (years)", y = "Amount (USD)", title = "Nominal Interest") +
-  #    theme_minimal()
+    interest_visual <- ggplot(
+      data = interest,
+      aes(x = time, y = Amount, color = Payment)) + 
+      geom_point() +
+      labs(x = "Time (years)", y = "Amount (USD)", title = "Nominal Interest") +
+      theme_minimal()
     
-  #  interest_visual
+    interest_visual
     
-  #})
+  })
   
   }
 
