@@ -15,7 +15,7 @@ help_page = ui.markdown(
     "Contents for Help Page"
 )
 
-income_page = ui.page_sidebar(
+mortgage_page = ui.page_sidebar(
     ui.sidebar(
         ui.input_slider(id = "home_price_slider",
                         label = "Home price",
@@ -60,20 +60,29 @@ income_page = ui.page_sidebar(
                         post = " %"),
         bg="#f8f8f8"
     ),
+    ui.layout_columns(
+        ui.card(
+            ui.card_header("Currenct Value at Time of Payment"),
+            # output_widget("cpi_plot"),
+        ),
+        ui.card(
+            ui.card_header("Value Adjusted to Time of Purchase"),
+            # output_widget("cpi_plot"),
+        ),
+        col_widths=[6, 6],
+    ),    
 )
 
 app_ui = ui.page_fluid(
     ui.h1("Mortgage"),
     ui.navset_card_underline(
-        ui.nav_panel("Income", income_page),
+        ui.nav_panel("Mortgage", mortgage_page),
         ui.nav_spacer(),  
         ui.nav_menu(
             "More",  # The title of the dropdown menu
             ui.nav_panel("Help", help_page),
             "---",  # A horizontal divider
             ui.nav_control(ui.a("Posit", href="https://posit.co", target="_blank")), # External link
-            ui.nav_control(ui.a("US Census", href="https://data.census.gov/", target="_blank")), # External link
-            ui.nav_control(ui.a("BLS", href="https://www.bls.gov/", target="_blank")), # External link
             align="right", # Aligns the menu to the right side of the navbar
         ),
         id="selected_navset_card_underline",

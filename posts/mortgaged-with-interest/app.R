@@ -214,8 +214,7 @@ ui <- fluidPage(
                   step = 0.1,
                   post = " %"), # Adds the '%' sign to the displayed value
       
-      sliderInput(inputId = "appreciation_rate_slider"
-                  ,
+      sliderInput(inputId = "appreciation_rate_slider",
                   label = "Appreciation rate",
                   min = 1, 
                   max = 16, 
