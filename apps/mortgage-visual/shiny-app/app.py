@@ -15,11 +15,22 @@ help_page = ui.markdown(
     "Contents for Help Page"
 )
 
+income_page = ui.page_sidebar(
+    ui.sidebar(
+        ui.input_slider(id = "home_price_slider",
+                        label = "Home price",
+                        min = 0,
+                        max = 1e6,
+                        value = 2e5,
+                        pre = "$"),
+        bg="#f8f8f8"
+    ),
+)
+
 app_ui = ui.page_fluid(
     ui.h1("Mortgage"),
     ui.navset_card_underline(
-#        ui.nav_panel("Income", income_page),
-#        ui.nav_panel("CPI", cpi_page),
+        ui.nav_panel("Income", income_page),
         ui.nav_spacer(),  
         ui.nav_menu(
             "More",  # The title of the dropdown menu
