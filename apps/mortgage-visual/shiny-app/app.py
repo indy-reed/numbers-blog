@@ -62,6 +62,9 @@ mortgage_page = ui.page_sidebar(
     ),
     ui.layout_columns(
         ui.card(
+            ui.card(ui.card_header("House payment"),),
+        ),
+        ui.card(
             ui.card_header("Currenct Value at Time of Payment"),
             # output_widget("cpi_plot"),
         ),
@@ -69,7 +72,7 @@ mortgage_page = ui.page_sidebar(
             ui.card_header("Value Adjusted to Time of Purchase"),
             # output_widget("cpi_plot"),
         ),
-        col_widths=[6, 6],
+        col_widths=[12, 6, 6],
     ),    
 )
 
