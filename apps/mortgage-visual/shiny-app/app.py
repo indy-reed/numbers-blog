@@ -11,8 +11,28 @@ import plotly.express as px
 from shiny import App, reactive, render, ui
 from shinywidgets import output_widget, render_widget  
 
+help_page = ui.markdown(
+    "Contents for Help Page"
+)
+
 app_ui = ui.page_fluid(
-    ui.h1("Data Playground"),
+    ui.h1("Mortgage"),
+    ui.navset_card_underline(
+#        ui.nav_panel("Income", income_page),
+#        ui.nav_panel("CPI", cpi_page),
+        ui.nav_spacer(),  
+        ui.nav_menu(
+            "More",  # The title of the dropdown menu
+            ui.nav_panel("Help", help_page),
+            "---",  # A horizontal divider
+            ui.nav_control(ui.a("Posit", href="https://posit.co", target="_blank")), # External link
+            ui.nav_control(ui.a("US Census", href="https://data.census.gov/", target="_blank")), # External link
+            ui.nav_control(ui.a("BLS", href="https://www.bls.gov/", target="_blank")), # External link
+            align="right", # Aligns the menu to the right side of the navbar
+        ),
+        id="selected_navset_card_underline",
+    ),
+    title="Mortgage",
 )
 
 def server(input, output, session):
