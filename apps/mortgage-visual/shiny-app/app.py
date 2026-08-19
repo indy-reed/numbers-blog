@@ -265,7 +265,7 @@ def server(input, output, session):
     def house_payment():
 
         # house_price = input.home_price_slider()
-        mortgage_payment = a_nbar_i_pv(input.interest_rate_slider(), 30)
+        mortgage_payment = a_nbar_i_pv(0.01*input.interest_rate_slider(), 30)
         # mortgage_payment = create_payment_schedule(
         #     input.home_price_slider(),
         #     input.interest_rate_slider(),
@@ -275,7 +275,7 @@ def server(input, output, session):
         #     input.insurance_slider(),
         #     30)
 
-        return "{}".format(input.interest_rate_slider())
+        return "{}".format(mortgage_payment)
 
     @render.ui
     def property_tax():
