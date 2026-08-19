@@ -16,7 +16,7 @@ ICONS = {
     # "tax": fa.icon_svg("building-columns", "solid"),
     "payment": fa.icon_svg("sack-dollar"),
     "tax": fa.icon_svg("building-columns"),
-    "house": fa.icon_svg("dollar-sign"),
+    "house": fa.icon_svg("house-flood-water"),
     # "ellipsis": fa.icon_svg("ellipsis"),
 }
 
@@ -103,7 +103,7 @@ mortgage_page = ui.page_sidebar(
         bg="#f8f8f8"
     ),
     ui.layout_columns(
-        ui.value_box("House payment", 
+        ui.value_box("Mortgage payment", 
                      ui.output_ui("house_payment"), 
                      showcase=ICONS["payment"],
                      ),
