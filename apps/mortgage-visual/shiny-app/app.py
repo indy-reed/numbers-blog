@@ -13,9 +13,9 @@ from shinywidgets import output_widget, render_widget
 
 ICONS = {
     # "house": fa.icon_svg("house", "solid"),
-    # "tax": fa.icon_svg("building-collumns", "solid"),
+    # "tax": fa.icon_svg("building-columns", "solid"),
     "payment": fa.icon_svg("sack-dollar"),
-    "tax": fa.icon_svg("dollar-sign"),
+    "tax": fa.icon_svg("building-columns"),
     "house": fa.icon_svg("dollar-sign"),
     # "ellipsis": fa.icon_svg("ellipsis"),
 }
