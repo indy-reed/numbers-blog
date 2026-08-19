@@ -275,7 +275,7 @@ def server(input, output, session):
         #     0.01*input.insurance_slider(),
         #     30)
 
-        return "{}".format(mortgage_payment)
+        return "${:.2f}".format(mortgage_payment)
 
     @render.ui
     def property_tax():
