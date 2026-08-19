@@ -265,14 +265,14 @@ def server(input, output, session):
     def house_payment():
 
         # house_price = input.home_price_slider()
-        mortgage_payment = a_nbar_i_pv(0.01*input.interest_rate_slider(), 30)
+        mortgage_payment = input.home_price_slider()/a_nbar_i_pv(0.01*input.interest_rate_slider(), 30)
         # mortgage_payment = create_payment_schedule(
         #     input.home_price_slider(),
-        #     input.interest_rate_slider(),
-        #     input.inflation_rate_slider(),
-        #     input.appreciation_rate_slider(),
-        #     input.tax_rate_slider(),
-        #     input.insurance_slider(),
+        #     0.01*input.interest_rate_slider(),
+        #     0.01*input.inflation_rate_slider(),
+        #     0.01*input.appreciation_rate_slider(),
+        #     0.01*input.tax_rate_slider(),
+        #     0.01*input.insurance_slider(),
         #     30)
 
         return "{}".format(mortgage_payment)
