@@ -11,6 +11,13 @@ import plotly.express as px
 from shiny import App, reactive, render, ui
 from shinywidgets import output_widget, render_widget  
 
+ICONS = {
+    "house": fa.icon_svg("house", "solid"),
+    "tax": fa.icon_svg("building-collumns", "solid"),
+    "payment": fa.icon_svg("sack-dollar", "solid"),
+    # "ellipsis": fa.icon_svg("ellipsis"),
+}
+
 # General financial functions for models:
 
 # Mortgage payment - payment assumes an annuity immediate rather than an annuity
@@ -96,12 +103,15 @@ mortgage_page = ui.page_sidebar(
     ui.layout_columns(
         ui.value_box("House payment", 
                      ui.output_ui("house_payment"), 
+                     showcase=ICONS["payment"],
                      ),
         ui.value_box("Property tax", 
                      ui.output_ui("property_tax"), 
+                     showcase=ICONS["tax"],
                      ),
         ui.value_box("Homeowners insurance", 
                      ui.output_ui("insurance"), 
+                     showcase=ICONS["house"],
                      ),
         col_widths=[4, 4, 4],
     ),    
