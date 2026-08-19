@@ -131,7 +131,7 @@ def server(input, output, session):
 
         house_price = input.home_price_slider()
 
-        return "{:.2f}M".format(house_price)
+        return "${:.2f}".format(house_price)
 
 app = App(app_ui, server)
 
