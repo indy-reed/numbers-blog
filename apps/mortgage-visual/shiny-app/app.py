@@ -94,16 +94,16 @@ mortgage_page = ui.page_sidebar(
         bg="#f8f8f8"
     ),
     ui.layout_columns(
-        ui.card(
-            ui.card(ui.card_header("House payment"),),
-        ),
+        ui.value_box("House payment", 
+                     ui.output_ui("house_payment"), 
+                     ),
         ui.card(
             ui.card_header("Currenct Value at Time of Payment"),
         ),
         ui.card(
             ui.card_header("Value Adjusted to Time of Purchase"),
         ),
-        col_widths=[12, 6, 6],
+        col_widths=[4, 4, 4],
     ),    
 )
 
@@ -125,7 +125,13 @@ app_ui = ui.page_fluid(
 )
 
 def server(input, output, session):
-    pass
+
+    @render.ui
+    def house_payment():
+
+        house_price = input.home_price_slider()
+
+        return "{:.2f}M".format(house_price)
 
 app = App(app_ui, server)
 
