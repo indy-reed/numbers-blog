@@ -27,7 +27,7 @@ ICONS = {
 def a_nbar_i_pv (i: float, n: int) -> float:
     # where i is the interest rate and n is the number of payments (or the length
     # of the loan)
-    return (1 - pow(1 + i, -n))/i
+    return pow(1 + i, -n)
 
 # Inflation rate is assumed to act geometrically and compounds like interests.
 # The real interest rate or rate of return is the ratio of the nominal interest 
@@ -265,7 +265,7 @@ def server(input, output, session):
     def house_payment():
 
         # house_price = input.home_price_slider()
-        mortgage_payment = input.home_price_slider()/a_nbar_i_pv(input.interest_rate_slider(), 30)
+        mortgage_payment = a_nbar_i_pv(input.interest_rate_slider(), 30)
         # mortgage_payment = create_payment_schedule(
         #     input.home_price_slider(),
         #     input.interest_rate_slider(),
@@ -275,7 +275,7 @@ def server(input, output, session):
         #     input.insurance_slider(),
         #     30)
 
-        return "${:.2f}".format(mortgage_payment)
+        return "{}".format(mortgage_payment)
 
     @render.ui
     def property_tax():
