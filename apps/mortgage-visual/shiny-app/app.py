@@ -97,9 +97,9 @@ mortgage_page = ui.page_sidebar(
         ui.value_box("House payment", 
                      ui.output_ui("house_payment"), 
                      ),
-        ui.card(
-            ui.card_header("Currenct Value at Time of Payment"),
-        ),
+        ui.value_box("Property tax", 
+                     ui.output_ui("property_tax"), 
+                     ),
         ui.card(
             ui.card_header("Value Adjusted to Time of Purchase"),
         ),
@@ -132,6 +132,13 @@ def server(input, output, session):
         house_price = input.home_price_slider()
 
         return "${:.2f}".format(house_price)
+
+    @render.ui
+    def property_tax():
+
+        property_tax = input.tax_rate_slider() * input.home_price_slider() / 100
+
+        return "${:.2f}".format(property_tax)
 
 app = App(app_ui, server)
 
