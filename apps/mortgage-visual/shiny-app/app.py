@@ -27,7 +27,7 @@ ICONS = {
 def a_nbar_i_pv (i: float, n: int) -> float:
     # where i is the interest rate and n is the number of payments (or the length
     # of the loan)
-    return (1 - (1 + i) ^-n)/i
+    return (1 - pow(1 + i, -n))/i
 
 # Inflation rate is assumed to act geometrically and compounds like interests.
 # The real interest rate or rate of return is the ratio of the nominal interest 
