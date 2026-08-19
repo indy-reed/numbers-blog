@@ -12,12 +12,9 @@ from shiny import App, reactive, render, ui
 from shinywidgets import output_widget, render_widget  
 
 ICONS = {
-    # "house": fa.icon_svg("house", "solid"),
-    # "tax": fa.icon_svg("building-columns", "solid"),
     "payment": fa.icon_svg("sack-dollar"),
     "tax": fa.icon_svg("building-columns"),
     "house": fa.icon_svg("house-flood-water"),
-    # "ellipsis": fa.icon_svg("ellipsis"),
 }
 
 # General financial functions for models:
@@ -52,6 +49,132 @@ def pv (fv: float, i: float, n: int) -> float:
     # where i is the rate of return (it may be nominal or real - adjusted for 
     # inflation) and n is the time period.
     fv * (1 + i)^-n
+
+# Payment schedule
+def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float, hir: float, n: int) :
+    # where r is the interest rate, n is the number of payments (or the length
+    # of the loan), p is the mortgage repayment amount, a is the appreciation
+    # rate.
+    #   PV = (Payment) [Annuity Immediate (interest rate, term) ] = Home price
+    payment = p / a_nbar_i_pv(i = r, n = n)
+
+    return payment
+    # Construct mortgage table as reference for visualization
+  
+#   # Number of years from start of the mortgage
+#   time <- seq(n)
+  
+#   # Level mortgage payment, level property tax payment, level insurance premium
+#   # payment, mortgage interest and principal
+#   mortgage_payment <- rep(payment, n)
+#   interest_payment <- rep(NA_real_, n)
+#   principal_payment <- rep(NA_real_, n)
+  
+#   # Property tax and homeowners insurances will be based on the value of the
+#   # house.
+#   home_value <- rep(p, n)
+#   property_tax_rate <- rep(ptr * p, n)
+#   home_insurance_rate <- rep(hir * p, n)
+  
+#   # variable used to track how much of the home loan has been paid.
+#   # The value will be used to determine how much interest is paid for
+#   # a particular payment. 
+#   remaining_principal <- p
+  
+#   # For the moment, it is easier to iterate through each year and decrease
+#   # the principal from the loan amount.
+#   for (j in 1:n) {
+#     interest_payment[j] <- remaining_principal * r
+#     principal_payment[j] <- payment - interest_payment[j]
+#     remaining_principal <- remaining_principal - principal_payment[j] 
+#   }
+  
+#   # appreciated home value. Assumes constant appreciation rate. Parameter
+#   # supplied in function input. Nominal rate - not adjusted to inflation.
+#   nominal_value <- fv(
+#     pv = home_value,
+#     i = a,
+#     n = time
+#   )
+  
+#   # appreciated value of property tax amount
+#   nominal_property_tax <- fv(
+#     pv = property_tax_rate,
+#     i = a,
+#     n = time
+#   )
+
+#   # appreciated value of homeowners insurance amount
+#   nominal_home_insurance <- fv(
+#     pv = home_insurance_rate,
+#     i = a,
+#     n = time
+#   )
+  
+#   # inflation adjustments. Assumes inflation compounds with time at a constant
+#   # rate (i) which is supplied as a parameter to the function.
+#   # Each nominal mortgage payment is adjusted for inflation. 
+#   real_mortgage_payment <- pv(
+#     fv = mortgage_payment,
+#     i = i,
+#     n = time
+#   )
+  
+#   # Each nominal portion of principal is adjusted for inflation. 
+#   real_principal_payment <- pv(
+#     fv = principal_payment,
+#     i = i,
+#     n = time
+#   )
+  
+#   # Each interest portion of principal is adjusted for inflation. 
+#   real_interest_payment <- pv(
+#     fv = interest_payment,
+#     i = i,
+#     n = time
+#   )
+  
+#   # Real appreciation rate: nominal appreciation rate (a) adjusted for
+#   # inflation (i).
+#   real_appreciation_rate <- r_real(a, i)
+  
+#   # Real future value of house over time.
+#   real_value <- fv(
+#     pv = p,
+#     i = real_appreciation_rate,
+#     n = time
+#   )
+  
+#   real_property_tax <- fv(
+#     pv = property_tax_rate,
+#     i = real_appreciation_rate,
+#     n = time
+#   )
+  
+#   real_home_insurance <- fv(
+#     pv = home_insurance_rate,
+#     i = real_appreciation_rate,
+#     n = time
+#   )
+  
+#   # Combine information into a data frame for visualization and other analysis.
+#   payment_schedule <- tibble(time = time, 
+#                              nominal_mortgage = mortgage_payment, 
+#                              nominal_principal = principal_payment,
+#                              nominal_interest = interest_payment,
+#                              nominal_value = nominal_value,
+#                              nominal_property_tax = nominal_property_tax,
+#                              nominal_home_insurance = nominal_home_insurance,
+#                              real_mortgage = real_mortgage_payment,
+#                              real_principal = real_principal_payment,
+#                              real_interest = real_interest_payment,
+#                              real_value = real_value,
+#                              real_property_tax = real_property_tax,
+#                              real_home_insurance = real_home_insurance)
+
+#   return(payment_schedule)
+# }
+
 
 help_page = ui.markdown(
     "Contents for Help Page"
@@ -142,8 +265,16 @@ def server(input, output, session):
     def house_payment():
 
         house_price = input.home_price_slider()
+        mortgage_payment = create_payment_schedule(
+            input.home_price_slider(),
+            input.interest_rate_slider(),
+            input.inflation_rate_slider(),
+            input.appreciation_rate_slider(),
+            input.tax_rate_slider(),
+            input.insurance_slider(),
+            30)
 
-        return "${:.2f}".format(house_price)
+        return "${:.2f}".format(mortgage_payment)
 
     @render.ui
     def property_tax():
