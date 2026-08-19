@@ -12,9 +12,11 @@ from shiny import App, reactive, render, ui
 from shinywidgets import output_widget, render_widget  
 
 ICONS = {
-    "house": fa.icon_svg("house", "solid"),
-    "tax": fa.icon_svg("building-collumns", "solid"),
-    "payment": fa.icon_svg("sack-dollar", "solid"),
+    # "house": fa.icon_svg("house", "solid"),
+    # "tax": fa.icon_svg("building-collumns", "solid"),
+    "payment": fa.icon_svg("dollar-sign"),
+    "tax": fa.icon_svg("dollar-sign"),
+    "house": fa.icon_svg("dollar-sign"),
     # "ellipsis": fa.icon_svg("ellipsis"),
 }
 
