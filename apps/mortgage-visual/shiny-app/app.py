@@ -11,6 +11,39 @@ import plotly.express as px
 from shiny import App, reactive, render, ui
 from shinywidgets import output_widget, render_widget  
 
+# General financial functions for models:
+
+# Mortgage payment - payment assumes an annuity immediate rather than an annuity
+# due - meaning the first payment is made at time = 1 rather than at time = 0.
+# Assumes annual as opposed to monthly payment of all mortgage, property tax, 
+# and insurance. Assumes home loan compounds annually at fixed interest rate.
+
+def a_nbar_i_pv (i: float, n: int) -> float:
+    # where i is the interest rate and n is the number of payments (or the length
+    # of the loan)
+    return (1 - (1 + i) ^-n)/i
+
+# Inflation rate is assumed to act geometrically and compounds like interests.
+# The real interest rate or rate of return is the ratio of the nominal interest 
+# rate to the inflation rate.
+
+def r_real (r_nominal: float, r_inflation: float) -> float:
+    return (1 + r_nominal) / (1 + r_inflation) - 1
+
+# Functions for adjusting the time value of money based on a fixed rate.
+
+# Future value  
+def fv (pv: float, i: float, n: int) -> float:
+    # where i is the rate of return (it may be nominal or real - adjusted for 
+    # inflation), n is the time period and pv is the present value of the amount.
+    return pv * (1 + i)^n
+
+# Present value
+def pv (fv: float, i: float, n: int) -> float:
+    # where i is the rate of return (it may be nominal or real - adjusted for 
+    # inflation) and n is the time period.
+    fv * (1 + i)^-n
+
 help_page = ui.markdown(
     "Contents for Help Page"
 )
@@ -66,11 +99,9 @@ mortgage_page = ui.page_sidebar(
         ),
         ui.card(
             ui.card_header("Currenct Value at Time of Payment"),
-            # output_widget("cpi_plot"),
         ),
         ui.card(
             ui.card_header("Value Adjusted to Time of Purchase"),
-            # output_widget("cpi_plot"),
         ),
         col_widths=[12, 6, 6],
     ),    
