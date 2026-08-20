@@ -124,20 +124,10 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
     payment_schedule = pd.DataFrame({'time': time, 'nominal_mortgage': mortgage_payment, 
     'nominal_principal': principal_payment, 'nominal_interest': interest_payment,
     'nominal_value': nominal_value, 'nominal_property_tax': nominal_property_tax,
-    'nominal_home_insurance': nominal_home_insurance, 'real_mortgage': real_mortgage_payment})
-#   payment_schedule <- tibble(time = time, 
-#                              nominal_mortgage = mortgage_payment, 
-#                              nominal_principal = principal_payment,
-#                              nominal_interest = interest_payment,
-#                              nominal_value = nominal_value,
-#                              nominal_property_tax = nominal_property_tax,
-#                              nominal_home_insurance = nominal_home_insurance,
-#                              real_mortgage = real_mortgage_payment,
-#                              real_principal = real_principal_payment,
-#                              real_interest = real_interest_payment,
-#                              real_value = real_value,
-#                              real_property_tax = real_property_tax,
-#                              real_home_insurance = real_home_insurance)
+    'nominal_home_insurance': nominal_home_insurance, 'real_mortgage': real_mortgage_payment,
+    'real_principal': real_principal_payment, 'real_interest': real_interest_payment,
+    'real_value': real_value, 'real_property_tax': real_property_tax,
+    'real_home_insurance': real_home_insurance})
 
     return(payment_schedule)
 
