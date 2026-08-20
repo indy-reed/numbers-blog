@@ -61,19 +61,19 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
     # Construct mortgage table as reference for visualization
   
     # Number of years from start of the mortgage
-    time = pd.series(range(1, n))
+    time = pd.Series(range(1, n))
   
     # Level mortgage payment, level property tax payment, level insurance premium
     # payment, mortgage interest and principal
-    mortgage_payment = pd.series([payment] * n)
-    interest_payment = pd.series([float('nan')] * n)
-    principal_payment = pd.series([float('nan')] * n)
+    mortgage_payment = pd.Series([payment] * n)
+    interest_payment = pd.Series([float('nan')] * n)
+    principal_payment = pd.Series([float('nan')] * n)
   
     # Property tax and homeowners insurances will be based on the value of the
     # house.
-    home_value = pd.series([p] * n)
-    property_tax_rate = pd.series([ptr * p] * n)
-    home_insurance_rate = pd.series([hir * p] * n)
+    home_value = pd.Series([p] * n)
+    property_tax_rate = pd.Series([ptr * p] * n)
+    home_insurance_rate = pd.Series([hir * p] * n)
   
     # variable used to track how much of the home loan has been paid.
     # The value will be used to determine how much interest is paid for
