@@ -42,13 +42,13 @@ def r_real (r_nominal: float, r_inflation: float) -> float:
 def fv (pv: float, i: float, n: int) -> float:
     # where i is the rate of return (it may be nominal or real - adjusted for 
     # inflation), n is the time period and pv is the present value of the amount.
-    return pv * (1 + i)^n
+    return pv * pow(1 + i, n)
 
 # Present value
 def pv (fv: float, i: float, n: int) -> float:
     # where i is the rate of return (it may be nominal or real - adjusted for 
     # inflation) and n is the time period.
-    fv * (1 + i)^-n
+    return fv * pow(1 + i, -n)
 
 # Payment schedule
 def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float, hir: float, n: int) :
