@@ -89,18 +89,18 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
 
     # appreciated home value. Assumes constant appreciation rate. Parameter
     # supplied in function input. Nominal rate - not adjusted to inflation.
-    nominal_value = fv(pv = home_value, i = r, n = time)
+    # nominal_value = fv(pv = home_value, i = r, n = time)
   
     # appreciated value of property tax amount
-    nominal_property_tax = fv(pv = property_tax_rate, i = a, n = time)
+    # nominal_property_tax = fv(pv = property_tax_rate, i = a, n = time)
 
     # appreciated value of homeowners insurance amount
-    nominal_home_insurance = fv(pv = home_insurance_rate, i = a, n = time)
+    # nominal_home_insurance = fv(pv = home_insurance_rate, i = a, n = time)
   
     # inflation adjustments. Assumes inflation compounds with time at a constant
     # rate (i) which is supplied as a parameter to the function.
     # Each nominal mortgage payment is adjusted for inflation. 
-    real_mortgage_payment = pv(fv = mortgage_payment, i = i, n = time)
+    # real_mortgage_payment = pv(fv = mortgage_payment, i = i, n = time)
   
     # Each nominal portion of principal is adjusted for inflation. 
     # real_principal_payment = pv(fv = principal_payment, i = i, n = time)
@@ -119,9 +119,9 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
   
     # Combine information into a data frame for visualization and other analysis.
     payment_schedule = pd.DataFrame({'time': time, 'nominal_mortgage': mortgage_payment, 
-    'nominal_principal': principal_payment, 'nominal_interest': interest_payment,
-    'nominal_value': nominal_value, 'nominal_property_tax': nominal_property_tax,
-    'nominal_home_insurance': nominal_home_insurance, 'real_mortgage': real_mortgage_payment})
+    'nominal_principal': principal_payment, 'nominal_interest': interest_payment})
+    # 'nominal_value': nominal_value, 'nominal_property_tax': nominal_property_tax,
+    # 'nominal_home_insurance': nominal_home_insurance, 'real_mortgage': real_mortgage_payment})
 #   payment_schedule <- tibble(time = time, 
 #                              nominal_mortgage = mortgage_payment, 
 #                              nominal_principal = principal_payment,
