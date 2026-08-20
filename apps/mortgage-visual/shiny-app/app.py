@@ -78,29 +78,29 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
     # variable used to track how much of the home loan has been paid.
     # The value will be used to determine how much interest is paid for
     # a particular payment. 
-    # remaining_principal = p
+    remaining_principal = p
   
     # For the moment, it is easier to iterate through each year and decrease
     # the principal from the loan amount.
-    # for j in range(n):
-    #     interest_payment = remaining_principal * r
-    #     principal_payment[j] = payment - interest_payment[j]
-    #     remaining_principal = remaining_principal - principal_payment[j] 
+    for j in range(n):
+        interest_payment = remaining_principal * r
+        principal_payment[j] = payment - interest_payment[j]
+        remaining_principal = remaining_principal - principal_payment[j] 
 
     # appreciated home value. Assumes constant appreciation rate. Parameter
     # supplied in function input. Nominal rate - not adjusted to inflation.
-    # nominal_value = fv(pv = home_value, i = r, n = time)
+    nominal_value = fv(pv = home_value, i = r, n = time)
   
     # appreciated value of property tax amount
-    # nominal_property_tax = fv(pv = property_tax_rate, i = a, n = time)
+    nominal_property_tax = fv(pv = property_tax_rate, i = a, n = time)
 
     # appreciated value of homeowners insurance amount
-    # nominal_home_insurance = fv(pv = home_insurance_rate, i = a, n = time)
+    nominal_home_insurance = fv(pv = home_insurance_rate, i = a, n = time)
   
     # inflation adjustments. Assumes inflation compounds with time at a constant
     # rate (i) which is supplied as a parameter to the function.
     # Each nominal mortgage payment is adjusted for inflation. 
-    # real_mortgage_payment = pv(fv = mortgage_payment, i = i, n = time)
+    real_mortgage_payment = pv(fv = mortgage_payment, i = i, n = time)
   
     # Each nominal portion of principal is adjusted for inflation. 
     # real_principal_payment = pv(fv = principal_payment, i = i, n = time)
@@ -119,8 +119,9 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
   
     # Combine information into a data frame for visualization and other analysis.
     payment_schedule = pd.DataFrame({'time': time, 'nominal_mortgage': mortgage_payment, 
-    'nominal_principal': principal_payment, 'nominal_interest': interest_payment})
-    # 'nominal_value': nominal_value, 'nominal_property_tax': nominal_property_tax,})
+    'nominal_principal': principal_payment, 'nominal_interest': interest_payment,
+    'nominal_value': nominal_value, 'nominal_property_tax': nominal_property_tax,
+    'nominal_home_insurance': nominal_home_insurance, 'real_mortgage': real_mortgage_payment})
 #   payment_schedule <- tibble(time = time, 
 #                              nominal_mortgage = mortgage_payment, 
 #                              nominal_principal = principal_payment,
@@ -202,6 +203,12 @@ mortgage_page = ui.page_sidebar(
                      ),
         col_widths=[4, 4, 4],
     ),    
+    ui.layout_columns(
+        ui.card(
+            ui.card_header("Data"),
+            ui.output_data_frame("schedule_df"),
+        ),
+    ),
 )
 
 app_ui = ui.page_fluid(
@@ -226,16 +233,7 @@ def server(input, output, session):
     @render.ui
     def house_payment():
 
-        # house_price = input.home_price_slider()
         mortgage_payment = input.home_price_slider()/a_nbar_i_pv(0.01*input.interest_rate_slider(), 30)
-        # mortgage_payment = create_payment_schedule(
-        #     input.home_price_slider(),
-        #     0.01*input.interest_rate_slider(),
-        #     0.01*input.inflation_rate_slider(),
-        #     0.01*input.appreciation_rate_slider(),
-        #     0.01*input.tax_rate_slider(),
-        #     0.01*input.insurance_slider(),
-        #     30)
 
         return "${:.2f}".format(mortgage_payment)
 
@@ -252,6 +250,20 @@ def server(input, output, session):
         property_tax = input.insurance_slider() * input.home_price_slider() / 100
 
         return "${:.2f}".format(property_tax)
+
+    @render.data_frame
+    def schedule_df():
+
+        mortgage_payment = create_payment_schedule(
+            input.home_price_slider(),
+            0.01*input.interest_rate_slider(),
+            0.01*input.inflation_rate_slider(),
+            0.01*input.appreciation_rate_slider(),
+            0.01*input.tax_rate_slider(),
+            0.01*input.insurance_slider(),
+            30)
+
+        return render.DataGrid(data=mortgage_payment)
 
 
 app = App(app_ui, server)
