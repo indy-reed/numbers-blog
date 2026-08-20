@@ -66,26 +66,29 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
     # Level mortgage payment, level property tax payment, level insurance premium
     # payment, mortgage interest and principal
     mortgage_payment = pd.Series([payment] * n)
-    # interest_payment = pd.Series([float('nan')] * n)
-    # principal_payment = pd.Series([float('nan')] * n)
+    interest_payment_array = np.empty(n, dtype = float)
+    principal_payment_array = np.empty(n, dtype = float)
   
     # Property tax and homeowners insurances will be based on the value of the
     # house.
-    # home_value = pd.Series([p] * n)
-    # property_tax_rate = pd.Series([ptr * p] * n)
-    # home_insurance_rate = pd.Series([hir * p] * n)
+    home_value = pd.Series([p] * n)
+    property_tax_rate = pd.Series([ptr * p] * n)
+    home_insurance_rate = pd.Series([hir * p] * n)
   
     # variable used to track how much of the home loan has been paid.
     # The value will be used to determine how much interest is paid for
     # a particular payment. 
-    # remaining_principal = p
+    remaining_principal = p
   
     # For the moment, it is easier to iterate through each year and decrease
     # the principal from the loan amount.
-    # for j in range(n):
-    #     interest_payment = remaining_principal * r
-    #     principal_payment[j] = payment - interest_payment[j]
-    #     remaining_principal = remaining_principal - principal_payment[j] 
+    for j in range(n):
+        interest_payment_array[j] = remaining_principal * r
+        principal_payment_array[j] = payment - interest_payment_array[j]
+        remaining_principal = remaining_principal - principal_payment_array[j] 
+
+    principal_payment = pd.Series(principal_payment_array)
+    interest_payment = pd.Series(interest_payment_array)
 
     # appreciated home value. Assumes constant appreciation rate. Parameter
     # supplied in function input. Nominal rate - not adjusted to inflation.
@@ -118,8 +121,8 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
     # real_home_insurance = fv(pv = home_insurance_rate, i = real_appreciation_rate, n = time)
   
     # Combine information into a data frame for visualization and other analysis.
-    payment_schedule = pd.DataFrame({'time': time, 'nominal_mortgage': mortgage_payment}) 
-    # 'nominal_principal': principal_payment, 'nominal_interest': interest_payment})
+    payment_schedule = pd.DataFrame({'time': time, 'nominal_mortgage': mortgage_payment, 
+    'nominal_principal': principal_payment, 'nominal_interest': interest_payment})
     # 'nominal_value': nominal_value, 'nominal_property_tax': nominal_property_tax,
     # 'nominal_home_insurance': nominal_home_insurance, 'real_mortgage': real_mortgage_payment})
 #   payment_schedule <- tibble(time = time, 
