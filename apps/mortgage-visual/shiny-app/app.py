@@ -309,6 +309,15 @@ def server(input, output, session):
             xaxis_title = "Time",
             yaxis_title = "Real Amount",
         ) 
+
+        lineplot.update_layout(legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="right",
+            x=0.01
+            )
+        )
+
         return lineplot
 
 
