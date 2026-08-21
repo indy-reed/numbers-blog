@@ -258,7 +258,11 @@ def server(input, output, session):
     @render_widget  
     def nominal_plot():  
 
-        data = pd.melt(schedule_df(), id_vars=['time'], value_vars=['nominal_mortgage', 'nominal_property_tax', 'nominal_home_insurance'], var_name='nominal', value_name='amount')
+        nominal_list = ['mortgage', 'property_tax', 'home_insurance']
+        nominal_data = schedule_df()['time', 'nominal_mortgage', 'nominal_property_tax', 'nominal_home_insurance']
+        nominal_data = nominal_data.rename(columns={'nominal_mortgage':'mortgage', 
+        'nominal_property_tax':'property_tax', 'nominal_home_insurance':'home_insurance'})
+        data = pd.melt(nominal_data, id_vars=['time'], value_vars=nominal_list, var_name='nominal', value_name='amount')
         lineplot = px.line(
             data_frame=data,
             x="time",
@@ -268,7 +272,7 @@ def server(input, output, session):
 
         lineplot.update_layout(
             xaxis_title = "Time",
-            yaxis_title = "Amount",
+            yaxis_title = "Nominal Amount",
         ) 
         return lineplot
 
