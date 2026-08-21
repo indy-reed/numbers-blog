@@ -199,7 +199,7 @@ mortgage_page = ui.page_sidebar(
     ui.layout_columns(
         ui.card(
             ui.card_header("Data"),
-            ui.output_data_frame("schedule_df"),
+            output_widget("nominal_plot"),
         ),
     ),
 )
@@ -224,7 +224,7 @@ app_ui = ui.page_fluid(
 def server(input, output, session):
 
     @reactive.calc
-    def payment():
+    def schedule_df():
         return create_payment_schedule(
             input.home_price_slider(),
             0.01*input.interest_rate_slider(),
@@ -255,10 +255,22 @@ def server(input, output, session):
 
         return "${:.2f}".format(property_tax)
 
-    @render.data_frame
-    def schedule_df():
+    @render_widget  
+    def nominal_plot():  
 
-        return render.DataGrid(data=payment())
+        data = pd.melt(schedule_df(), id_vars=['time'], value_vars=['nominal_mortgage', 'nominal_property_tax', 'nominal_home_insurance'], var_name='nominal', value_name='amount')
+        lineplot = px.line(
+            data_frame=data,
+            x="time",
+            y="amount",
+            color="nominal"
+        )
+
+        lineplot.update_layout(
+            xaxis_title = "Time",
+            yaxis_title = "Amount",
+        ) 
+        return lineplot
 
 
 app = App(app_ui, server)
