@@ -313,7 +313,7 @@ def server(input, output, session):
         lineplot.update_layout(legend=dict(
             yanchor="top",
             y=0.99,
-            xanchor="left",
+            xanchor="right",
             x=0.99
             )
         )
