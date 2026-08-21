@@ -198,9 +198,14 @@ mortgage_page = ui.page_sidebar(
     ),    
     ui.layout_columns(
         ui.card(
-            ui.card_header("Data"),
+            ui.card_header("Nominal Payment"),
             output_widget("nominal_plot"),
         ),
+        ui.card(
+            ui.card_header("Inflation Adjusted Payment"),
+            output_widget("real_plot"),
+        ),
+        col_widths=[6, 6],
     ),
 )
 
@@ -273,6 +278,27 @@ def server(input, output, session):
         lineplot.update_layout(
             xaxis_title = "Time",
             yaxis_title = "Nominal Amount",
+        ) 
+        return lineplot
+
+    @render_widget  
+    def real_plot():  
+
+        real_list = ['mortgage', 'property_tax', 'home_insurance']
+        real_data = schedule_df()[['time', 'real_mortgage', 'real_property_tax', 'real_home_insurance']]
+        real_data = real_data.rename(columns={'real_mortgage':'mortgage', 
+        'real_property_tax':'property_tax', 'real_home_insurance':'home_insurance'})
+        data = pd.melt(real_data, id_vars=['time'], value_vars=real_list, var_name='real', value_name='amount')
+        lineplot = px.line(
+            data_frame=data,
+            x="time",
+            y="amount",
+            color="real"
+        )
+
+        lineplot.update_layout(
+            xaxis_title = "Time",
+            yaxis_title = "Real Amount",
         ) 
         return lineplot
 
