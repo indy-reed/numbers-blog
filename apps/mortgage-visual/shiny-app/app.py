@@ -223,6 +223,17 @@ app_ui = ui.page_fluid(
 
 def server(input, output, session):
 
+    @reactive.calc
+    def payment():
+        return create_payment_schedule(
+            input.home_price_slider(),
+            0.01*input.interest_rate_slider(),
+            0.01*input.inflation_rate_slider(),
+            0.01*input.appreciation_rate_slider(),
+            0.01*input.tax_rate_slider(),
+            0.01*input.insurance_slider(),
+            30)
+
     @render.ui
     def house_payment():
 
@@ -247,16 +258,7 @@ def server(input, output, session):
     @render.data_frame
     def schedule_df():
 
-        mortgage_payment = create_payment_schedule(
-            input.home_price_slider(),
-            0.01*input.interest_rate_slider(),
-            0.01*input.inflation_rate_slider(),
-            0.01*input.appreciation_rate_slider(),
-            0.01*input.tax_rate_slider(),
-            0.01*input.insurance_slider(),
-            30)
-
-        return render.DataGrid(data=mortgage_payment)
+        return render.DataGrid(data=payment())
 
 
 app = App(app_ui, server)
