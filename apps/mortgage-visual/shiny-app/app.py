@@ -166,17 +166,17 @@ mortgage_page = ui.page_sidebar(
                         step = 0.1,
                         post = " %"),
         ui.input_slider(id = "tax_rate_slider",
-                        label = "Property tax rate per $100 of home price (appraised value)",
+                        label = "Property tax rate per $100 of current home value",
                         min = 0,
                         max = 4,
                         value = 2,
                         step = 0.1,
                         post = " %"),
         ui.input_slider(id = "insurance_slider",
-                        label = "Homeowners insurance rate per $100 of home price",
+                        label = "Homeowners insurance rate per $100 of current home value",
                         min = 0,
                         max = 4,
-                        value = 2,
+                        value = 1.8,
                         step = 0.1,
                         post = " %"),
         bg="#f8f8f8"
@@ -279,6 +279,15 @@ def server(input, output, session):
             xaxis_title = "Time",
             yaxis_title = "Nominal Amount",
         ) 
+
+        lineplot.update_layout(legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="left",
+            x=0.01
+            )
+        )
+
         return lineplot
 
     @render_widget  
