@@ -131,6 +131,23 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
 
     return(payment_schedule)
 
+payment_plot_panel = ui.card(
+    ui.card_header("Median Income"),
+    output_widget("income_org_plot"),
+        ui.card(
+            ui.card_header("Nominal Payment"),
+            output_widget("nominal_plot"),
+        ),
+        ui.card(
+            ui.card_header("Inflation Adjusted Payment"),
+            output_widget("real_plot"),
+        ),
+        col_widths=[6, 6],
+)
+
+payment_data_panel = ui.card(
+    ui.card_header("Inflation Adjusted Median Income in 2023 USD"),
+)
 
 help_page = ui.markdown(
     "Contents for Help Page"
@@ -197,15 +214,10 @@ mortgage_page = ui.page_sidebar(
         col_widths=[4, 4, 4],
     ),    
     ui.layout_columns(
-        ui.card(
-            ui.card_header("Nominal Payment"),
-            output_widget("nominal_plot"),
+        ui.navset_card_tab(
+            ui.nav_panel("Plots", payment_plot_panel),
+            ui.nav_panel("Data", payment_data_panel),
         ),
-        ui.card(
-            ui.card_header("Inflation Adjusted Payment"),
-            output_widget("real_plot"),
-        ),
-        col_widths=[6, 6],
     ),
 )
 
