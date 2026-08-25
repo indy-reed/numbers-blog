@@ -2,7 +2,7 @@
 title: "Socialism: Corporatism by Another Name"
 subtitle: "What would happen if government took over the largest companies?"
 author: "David Price"
-date: "2026-07-23"
+date: "2026-08-25"
 categories: [analysis, technology, environment]
 ---
 
