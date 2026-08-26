@@ -144,7 +144,8 @@ payment_plot_panel = ui.layout_columns(
 )
 
 payment_data_panel = ui.card(
-    ui.card_header("Inflation Adjusted Median Income in 2023 USD"),
+    ui.card_header("Payment Data"),
+    ui.output_data_frame("payment_df"),
 )
 
 help_page = ui.markdown(
@@ -216,6 +217,7 @@ mortgage_page = ui.page_sidebar(
             ui.nav_panel("Plots", payment_plot_panel),
             ui.nav_panel("Data", payment_data_panel),
         ),
+        col_width = [12],
     ),
 )
 
@@ -248,6 +250,11 @@ def server(input, output, session):
             0.01*input.tax_rate_slider(),
             0.01*input.insurance_slider(),
             30)
+
+    @render.data_frame
+    def payment_df():
+
+        return render.DataGrid(data=schedule_df()[['time', 'nominal_mortgage', 'nominal_property_tax', 'nominal_home_insurance', 'real_mortgage', 'real_property_tax', 'real_home_insurance']])
 
     @render.ui
     def house_payment():
