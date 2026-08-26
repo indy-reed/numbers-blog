@@ -145,7 +145,7 @@ payment_plot_panel = ui.layout_columns(
 
 payment_data_panel = ui.card(
     ui.card_header("Payment Data"),
-    ui.output_data_frame("payment_df"),
+    # ui.output_data_frame("payment_df"),
 )
 
 help_page = ui.markdown(
