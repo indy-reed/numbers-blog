@@ -140,12 +140,11 @@ payment_plot_panel = ui.layout_columns(
         ui.card_header("Inflation Adjusted Payment"),
         output_widget("real_plot"),
     ),
-    # col_widths=[6, 6],
 )
 
 payment_data_panel = ui.card(
     ui.card_header("Payment Data"),
-    # ui.output_data_frame("payment_df"),
+    ui.output_data_frame("payment_df"),
 )
 
 help_page = ui.markdown(
@@ -251,10 +250,12 @@ def server(input, output, session):
             0.01*input.insurance_slider(),
             30)
 
-    # @render.data_frame
-    # def payment_df():
+    @render.data_frame
+    def payment_df():
 
-    #     return render.DataGrid(data=schedule_df()[['time', 'nominal_mortgage', 'nominal_property_tax', 'nominal_home_insurance', 'real_mortgage', 'real_property_tax', 'real_home_insurance']])
+        data = schedule_df()[['time', 'nominal_mortgage', 'nominal_property_tax', 'nominal_home_insurance', 'real_mortgage', 'real_property_tax', 'real_home_insurance']]
+        data = data.round({'nominal_mortgage': 2, 'nominal_property_tax': 2, 'nominal_home_insurance': 2, 'real_mortgage': 2, 'real_property_tax': 2, 'real_home_insurance': 2})
+        return render.DataGrid(data=data)
 
     @render.ui
     def house_payment():
