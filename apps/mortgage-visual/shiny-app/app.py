@@ -131,18 +131,16 @@ def create_payment_schedule (p: float, r: float, i: float, a: float, ptr: float,
 
     return(payment_schedule)
 
-payment_plot_panel = ui.card(
-    ui.card_header("Median Income"),
-    output_widget("income_org_plot"),
-        # ui.card(
-        #     ui.card_header("Nominal Payment"),
-        #     output_widget("nominal_plot"),
-        # ),
-        # ui.card(
-        #     ui.card_header("Inflation Adjusted Payment"),
-        #     output_widget("real_plot"),
-        # ),
-        # col_widths=[6, 6],
+payment_plot_panel = ui.layout_columns(
+    ui.card(
+        ui.card_header("Nominal Payment"),
+        output_widget("nominal_plot"),
+    ),
+    ui.card(
+        ui.card_header("Inflation Adjusted Payment"),
+        output_widget("real_plot"),
+    ),
+    col_widths=[6, 6],
 )
 
 payment_data_panel = ui.card(
