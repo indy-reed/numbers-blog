@@ -217,7 +217,7 @@ mortgage_page = ui.page_sidebar(
             ui.nav_panel("Plots", payment_plot_panel),
             ui.nav_panel("Data", payment_data_panel),
         ),
-        col_width = [12],
+        # col_width = [12],
     ),
 )
 
