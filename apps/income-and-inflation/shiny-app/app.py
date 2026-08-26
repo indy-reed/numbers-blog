@@ -56,21 +56,21 @@ help_page = ui.markdown(
     "Contents for Help Page"
 )
 
-annual_median_income_panel = ui.card(
-    ui.card_header("Median Income"),
-    output_widget("income_org_plot"),
-    output_widget("income_adj_plot"),
-    col_widths=[6, 6],
-)
-
-annual_median_income_adj_panel = ui.card(
-    ui.card_header("Inflation Adjusted Median Income in 2023 USD"),
-    output_widget("income_adj_plot"),
-)
-
 annual_median_income_data = ui.card(
     ui.card_header("Median Income Data"),
     ui.output_data_frame("income_df"),
+)
+
+annual_median_income_panel = ui.layout_columns(
+    ui.card(
+        ui.card_header("Median Income"),
+        output_widget("income_org_plot"),
+    ),    
+    ui.card(
+        ui.card_header("Inflation Adjusted Median Income in 2023 USD"),
+        output_widget("income_adj_plot"),
+    ),    
+    col_widths=[6, 6],
 )
 
 income_page = ui.page_sidebar(
