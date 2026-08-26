@@ -59,11 +59,7 @@ help_page = ui.markdown(
 annual_median_income_panel = ui.card(
     ui.card_header("Median Income"),
     output_widget("income_org_plot"),
-)
-
-annual_median_income_data = ui.card(
-    ui.card_header("Median Income Data"),
-    ui.output_data_frame("income_df"),
+    output_widget("income_adj_plot"),
 )
 
 annual_median_income_adj_panel = ui.card(
@@ -71,8 +67,8 @@ annual_median_income_adj_panel = ui.card(
     output_widget("income_adj_plot"),
 )
 
-annual_median_income_adj_data = ui.card(
-    ui.card_header("Inflation Adjusted Median Income Data"),
+annual_median_income_data = ui.card(
+    ui.card_header("Median Income Data"),
     ui.output_data_frame("income_df"),
 )
 
@@ -112,23 +108,12 @@ income_page = ui.page_sidebar(
         ui.navset_card_tab(
             ui.nav_panel("Annual Median Income", annual_median_income_panel),
             ui.nav_panel("Data", annual_median_income_data),
-            # ui.nav_panel("Inflation Adjusted Median Income", annual_median_income_adj_panel),
         ),
-        ui.navset_card_tab(
-            # ui.nav_panel("Annual Median Income", annual_median_income_panel),
-            ui.nav_panel("Inflation Adjusted Median Income", annual_median_income_adj_panel),
-            ui.nav_panel("Data", annual_median_income_adj_data),
-        ),
-        # ui.card(
-        #     ui.card_header("Data"),
-        #     ui.output_data_frame("income_df"),
-        # ),
-        # col_widths=[6, 6],
         ui.card(
             ui.card(ui.card_header("Income Distribution"),),
             output_widget("income_adj_ridgeplot"),
         ),
-        col_widths=[7, 5, 12],
+        col_widths=[12, 12],
     ),
 )
 
@@ -267,25 +252,12 @@ def server(input, output, session):
         region = input.inc_reg_check()
         data = income_data_reg.query("year >= {} and year <= {}".format(year_first, year_last))
         data = data.loc[data["reg_name"].isin(region)]
-        data = data.rename(columns={"reg_name": "region", "income_median": "income median"})
+        data = data.rename(columns={"reg_name": "region", "income_median": "income median", "income_med_inf_adj": "adjusted median"})
         data["households"] = data["households"].map("{:,.0f}".format)
         data["income median"] = data["income median"].map("${:,.2f}".format)
-
-        return render.DataGrid(data=data[["year", "region", "households", "income median"]])
-
-    @render.data_frame
-    def income_adj_df():
-
-        year_first = input.inc_ann_slider()[0]
-        year_last = input.inc_ann_slider()[1]
-        region = input.inc_reg_check()
-        data = income_data_reg.query("year >= {} and year <= {}".format(year_first, year_last))
-        data = data.loc[data["reg_name"].isin(region)]
-        data = data.rename(columns={"reg_name": "region", "income_med_inf_adj": "adjusted median"})
-        data["households"] = data["households"].map("{:,.0f}".format)
         data["adjusted median"] = data["adjusted median"].map("${:,.2f}".format)
 
-        return render.DataGrid(data=data[["year", "region", "households", "adjusted median"]])
+        return render.DataGrid(data=data[["year", "region", "households", "income median", "adjusted median"]])
 
     @render_widget  
     def cpi_plot():  
